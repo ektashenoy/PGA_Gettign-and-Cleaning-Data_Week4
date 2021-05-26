@@ -1,0 +1,24 @@
+library(dplyr)
+###Merges the training and the test sets to create one data set. Extracts only the measurements on the mean and standard deviation for each measurement. Uses descriptive activity names to name the activities in the data set. Appropriately labels the data set with descriptive variable names. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+Appropriately labels the data set with descriptive VariablE names. 
+Train.X <- read. table (“. /UCI HAR Dataset/train/X_train.txt")
+Train.Y <- read. table (“. /UCI HAR Dataset/train/Y_train.txt")
+Subject. Train <- read. table (“. /UCI HAR Dataset/train/subject_train.txt")
+Test <- read. table (“. /UCI HAR Dataset/test/X_test.txt")
+Yeast <- read. table (“. /UCI HAR Dataset/test/Y_test.txt")
+Subtest <- read. table (“. /UCI HAR Dataset/test/subject_test.txt")
+Variable. Names <- read. table (“. /UCI HAR Dataset/features.txt")
+Activity. Labels <- read. table (“. /UCI HAR Dataset/activity_labels.txt")
+Total <- rbind (TrainX, X.test)
+Total <- rbind (TrainY, Y.test)
+Sub.ToTaL <- rbind (Sub.train, Sub.test)
+Selected.var <- VariablE_names [grep ("mean\\ (\\) |std\\ (\\)”, Variable names[,2]),]
+X.ToTaL <- X_ToTaL [, selected_var [,1]]
+colnames(Y_ToTaL) <- "activity"
+Y. ToTaL$activitylabel <- factor (Y_ToTaL$activity, labels = as. character (activity_labels [,2]))
+activitylabel <- Y. ToTaL [, -1]
+colnames(X_ToTaL) <- VariablE_names [selected_var [,1],2]
+colnames (Sub_ToTaL) <- "subject"
+ToTaL <- cbind (X. ToTaL, activitylabel, Sub.ToTaL)
+ToTaL.mean <- ToTaL %>% group_by (activitylabel, subject) %>% summarize_each(funs(mean))
+write. table (ToTaL_mean, file = “. /UCI HAR Dataset/tidydata.txt", row. names = FALSE, col. names = TRUE)
